@@ -1,0 +1,52 @@
+{
+    "version": 2,
+    "name": "my_project-2024",
+    "builds": [
+      {
+        "src": "package.json",
+        "use": "@vercel/node"
+      }
+    ],
+    "routes": [
+      {
+        "src": "/(.*)",
+        "dest": "/index.html"
+      }
+    ],
+    "env": {
+      "NODE_ENV": "production",
+      "API_URL": "https://api.example.com"
+    },
+    "build": {
+      "env": {
+        "NEXT_PUBLIC_API_URL": "https://api.example.com"
+      }
+    },
+    "headers": [
+      {
+        "source": "/(.*)",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "public, max-age=0, must-revalidate"
+          }
+        ]
+      }
+    ],
+    "redirects": [
+      {
+        "source": "/old-path",
+        "destination": "/new-path",
+        "statusCode": 301
+      }
+    ],
+    "rewrites": [
+      {
+        "source": "/api/:path*",
+        "destination": "https://api.example.com/:path*"
+      }
+    ],
+    "cleanUrls": true,
+    "trailingSlash": false
+  }
+  
