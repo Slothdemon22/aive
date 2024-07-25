@@ -5,19 +5,21 @@ import "react-toastify/dist/ReactToastify.css";
 
 function FoodItems() {
     const [foodItems, setFoodItems] = useState([]);
+
     const handleDelete = async (id) => {
         try {
-            const res=await axios.post(`http://aive.vercel.app/api/v1/food/remove_food`, { id } ,{ withCredentials: true });
+            const res = await axios.post(`http://localhost:3000/api/v1/food/remove_food`, { id }, { withCredentials: true });
             toast.success("Food item deleted successfully!");
-            fetchFoodItems();
+            fetchFoodItems(); // Refresh the list of food items
         } catch (error) {
             console.error("Error deleting food item:", error);
             toast.error("Failed to delete food item. Please try again.");
         }
     }
+
     const fetchFoodItems = async () => {
         try {
-            const res = await axios.get("http://aive.vercel.app/api/v1/food/getfood", { withCredentials: true });
+            const res = await axios.get("http://localhost:3000/api/v1/food/getfood", { withCredentials: true });
             console.log(res.data);
             if (res.data && res.data.data) {
                 setFoodItems(res.data.data); // Set food items to res.data.data
@@ -50,7 +52,7 @@ function FoodItems() {
                                     <button className="px-3 py-2 text-md tracking-tight bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-600 transition-colors">
                                         Add to Cart
                                     </button>
-                                    <button onClick={() => handleDelete(item._id) } className="px-7 py-2 text-md tracking-tight bg-red-500 text-white font-semibold rounded-lg shadow-md hover:bg-red-600 transition-colors">
+                                    <button onClick={() => handleDelete(item._id)} className="px-7 py-2 text-md tracking-tight bg-red-500 text-white font-semibold rounded-lg shadow-md hover:bg-red-600 transition-colors">
                                         Delete
                                     </button>
                                 </div>

@@ -30,7 +30,7 @@ function Additem() {
         formData.append('foodImage', foodData.foodimage);
 
         try {
-            const response = await axios.post('http://aive.vercel.app/api/v1/food/insertfood', formData, {
+            const response = await axios.post('http://localhost:3000/api/v1/food/insertfood', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
@@ -45,9 +45,9 @@ function Additem() {
 
     return (
         <>
-            <div className="h-screen  w-full mt-10 mr-8 md:mr-0 bg-gradient-to-r from-blue-50 to-green-50 flex items-center justify-center">
+            <div className="h-screen w-full mt-10 mr-8 md:mr-0 bg-gradient-to-r from-blue-50 to-green-50 flex items-center justify-center">
                 <form className="w-[80%] flex items-center flex-col justify-center md:w-[45%]" onSubmit={handleSubmit}>
-                    <div className="flex  w-full items-center justify-center mb-5">
+                    <div className="flex w-full items-center justify-center mb-5">
                         <label
                             htmlFor="foodimage"
                             className="flex flex-col items-center justify-center w-full h-80 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-gray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
@@ -78,7 +78,7 @@ function Additem() {
                             <input id="foodimage" type="file" className="hidden" onChange={handleFileChange} />
                         </label>
                     </div>
-                    <div className="mb-5 w-full ">
+                    <div className="mb-5 w-full">
                         <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900">
                             Food Name
                         </label>
@@ -110,7 +110,7 @@ function Additem() {
                         </label>
                         <textarea
                             id="description"
-                            rows="8" // Set the number of rows here
+                            rows="8"
                             value={foodData.description}
                             onChange={handleChange}
                             className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"

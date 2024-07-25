@@ -17,13 +17,11 @@ dotenv.config();
 const app = express();
 app.use(cookieParser());
 app.use(express.json())
-app.use(cors(
-    {
-        origin: ["http://localhost:5173", "http://localhost:5174","https://deploy-mern-lwhq.vercel.pp"],
-        methods:["POST","GET"],
-        credentials: true
-    }
-));
+app.use(cors({
+    origin: ["http://localhost:5173", "http://localhost:5174", "https://deploy-mern-lwhq.vercel.app"],
+    methods: ["POST", "GET"],
+    credentials: true
+}));
 
 connectDB();
 app.use('/api/v1/users', userRoutes);

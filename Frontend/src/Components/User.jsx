@@ -98,7 +98,7 @@ function User() {
                     <p className="text-lg text-gray-600">No food items found.</p>
                 )}
             </div>
-            <ToastContainer />
+           
         </>
     );
 }

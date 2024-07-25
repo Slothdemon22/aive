@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import { Link } from "react-router-dom";
-function Signin({ popup, setPopup }) {
+function Signin({ setAdmin ,popup, setPopup }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
@@ -18,8 +18,21 @@ function Signin({ popup, setPopup }) {
         email,
         password,
       }, { withCredentials: true });
-      
+      if (res.data.auth === "admin") {
+        setAdmin(true);
+        localStorage.setItem('auth', res.data.auth);
+      }
+      else if(res.data.auth === "user")
+      {
+        setAdmin(false);
+        localStorage.setItem('auth', res.data.auth);
+      }
+      else {
+        toast.error(res.data.message);
+        setAdmin(false);
+      }
       toast.success(res.data.message);
+
       navigate('/');
     } catch (error) {
       toast.error(error.response.data.message || "Something went wrong");

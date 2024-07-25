@@ -7,19 +7,21 @@ function Orders() {
     axios.defaults.withCredentials = true;
     const [orders, setOrders] = useState([]);
     const [updatingStatus, setUpdatingStatus] = useState(null);
-const delOrder = async (id) => {
-    try {
-        const res=await axios.post(`http://aive.vercel.app/api/v1/orders/remove_order`, { id } ,{ withCredentials: true });
-        toast.success("Order deleted successfully!");
-        fetchOrders();
-    } catch (error) {
-        console.error("Error deleting order:", error);
-        toast.error("Failed to delete order. Please try again.");
+
+    const delOrder = async (id) => {
+        try {
+            const res = await axios.post(`http://localhost:3000/api/v1/orders/remove_order`, { id }, { withCredentials: true });
+            toast.success("Order deleted successfully!");
+            fetchOrders();
+        } catch (error) {
+            console.error("Error deleting order:", error);
+            toast.error("Failed to delete order. Please try again.");
+        }
     }
-}
+
     const fetchOrders = async () => {
         try {
-            const res = await axios.get("http://aive.vercel.app/api/v1/orders/get_orders", { withCredentials: true });
+            const res = await axios.get("http://localhost:3000/api/v1/orders/get_orders", { withCredentials: true });
             console.log(res.data);
             if (res.data && res.data.data) {
                 setOrders(res.data.data); // Set orders to res.data.data
@@ -34,7 +36,7 @@ const delOrder = async (id) => {
     const handleStatusChange = async (orderId, newStatus) => {
         setUpdatingStatus(orderId);
         try {
-            await axios.post(`http://aive.vercel.app/api/v1/orders/update_status/`, {id: orderId, status: newStatus }, { withCredentials: true });
+            await axios.post(`http://localhost:3000/api/v1/orders/update_status/`, { id: orderId, status: newStatus }, { withCredentials: true });
             toast.success("Order status updated successfully!");
             fetchOrders(); // Refresh orders list
         } catch (error) {
@@ -52,7 +54,7 @@ const delOrder = async (id) => {
     return (
         <>
             <div className="flex flex-col items-center ml-16 justify-center min-h-screen bg-gray-100 p-6">
-                <div className="w-full max-w-3xl  mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
+                <div className="w-full max-w-3xl mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
                     <div className="p-6 border-b border-gray-200">
                         <h1 className="text-2xl font-semibold text-gray-800">Orders List</h1>
                     </div>
@@ -81,7 +83,7 @@ const delOrder = async (id) => {
                                         <p className={`text-lg ${order.status === 'delivered' ? 'text-green-600' : order.status === 'cancelled' ? 'text-red-600' : 'text-yellow-600'}`}>{order.status}</p>
                                     </div>
                                     <div className="flex items-center justify-evenly items-center">
-                                        <button  onClick={() => delOrder(order._id)} className="bg-yellow-500 m-2 px-6 text-white px-4 py-2 rounded-md hover:bg-yellow-600">Remove</button>
+                                        <button onClick={() => delOrder(order._id)} className="bg-yellow-500 m-2 px-6 text-white px-4 py-2 rounded-md hover:bg-yellow-600">Remove</button>
                                         <button
                                             onClick={() => handleStatusChange(order._id, 'pending')}
                                             disabled={order.status === 'pending' || updatingStatus}
@@ -112,7 +114,7 @@ const delOrder = async (id) => {
                     </div>
                 </div>
             </div>
-            <ToastContainer />
+          
         </>
     );
 }

@@ -66,7 +66,7 @@ function App() {
   return (
 <>
     <Router>
-      <Navbar admin={admin} />
+      <Navbar admin={admin} setAdmin={setAdmin} />
       
       <Routes>
         <Route path='/' element={<LandingPage/>} />
