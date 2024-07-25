@@ -57,7 +57,7 @@ function Navbar({ setAdmin,admin }) {
     setPopup(false);
   };
   const handleAdminClick = () => {
-    window.open('http://localhost:5174/fooditems', '_blank');
+    window.open('http://backend-app-sigma.vercel.app/fooditems', '_blank');
     handleLinkClick();
   };
 

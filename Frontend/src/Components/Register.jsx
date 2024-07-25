@@ -26,7 +26,7 @@ function Register() {
             return;
         }
         try {
-            const response = await axios.post('http://localhost:3000/api/v1/users/register', formData);
+            const response = await axios.post('http://backend-app-sigma.vercel.app/api/v1/users/register', formData);
             console.log(response.data);
             toast.success(response.data.message);
         } catch (error) {

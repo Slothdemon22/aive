@@ -9,7 +9,7 @@ function User() {
 
     const fetchFoodItems = async () => {
         try {
-            const res = await axios.get("http://localhost:3000/api/v1/food/getfood", { withCredentials: true });
+            const res = await axios.get("http://backend-app-sigma.vercel.app/api/v1/food/getfood", { withCredentials: true });
             if (res.data && res.data.data) {
                 setFoodItems(res.data.data);
                 toast.success("Food items fetched successfully!");
@@ -26,7 +26,7 @@ function User() {
 
     const handleOrder = async (itemId, quantity) => {
         try {
-            await axios.post("http://localhost:3000/api/v1/orders/place_order", {
+            await axios.post("http://backend-app-sigma.vercel.app/api/v1/orders/place_order", {
                 productId: itemId,
                 quantity: quantity,
             }, { withCredentials: true });
