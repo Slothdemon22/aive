@@ -17,7 +17,7 @@ router.post('/place_order', auth, async (req, res) => {
             });
         }
         // Find the food item by name
-        const item = await Food.findOne({ _id:productId });
+        const item = await Food.findOne({_id: productId});
 
         if (!item) {
             return res.status(404).json({
