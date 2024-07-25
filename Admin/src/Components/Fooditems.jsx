@@ -7,7 +7,7 @@ function FoodItems() {
     const [foodItems, setFoodItems] = useState([]);
     const handleDelete = async (id) => {
         try {
-            const res=await axios.post(`http://localhost:3000/api/v1/food/remove_food`, { id } ,{ withCredentials: true });
+            const res=await axios.post(`http://aive.vercel.app/api/v1/food/remove_food`, { id } ,{ withCredentials: true });
             toast.success("Food item deleted successfully!");
             fetchFoodItems();
         } catch (error) {
@@ -17,7 +17,7 @@ function FoodItems() {
     }
     const fetchFoodItems = async () => {
         try {
-            const res = await axios.get("http://localhost:3000/api/v1/food/getfood", { withCredentials: true });
+            const res = await axios.get("http://aive.vercel.app/api/v1/food/getfood", { withCredentials: true });
             console.log(res.data);
             if (res.data && res.data.data) {
                 setFoodItems(res.data.data); // Set food items to res.data.data

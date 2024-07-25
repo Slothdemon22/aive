@@ -30,7 +30,7 @@ function Additem() {
         formData.append('foodImage', foodData.foodimage);
 
         try {
-            const response = await axios.post('http://localhost:3000/api/v1/food/insertfood', formData, {
+            const response = await axios.post('http://aive.vercel.app/api/v1/food/insertfood', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
