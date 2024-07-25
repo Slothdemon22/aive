@@ -10,7 +10,12 @@ router.post('/place_order', auth, async (req, res) => {
     try {
         console.log(req.body)
         const { productId, quantity } = req.body;
-
+        if(!productId || !quantity) {
+            return res.status(400).json({   
+                status: 400,
+                message: "Please provide all the required fields",
+            });
+        }
         // Find the food item by name
         const item = await Food.findOne({ _id:productId });
 
@@ -93,6 +98,7 @@ router.get('/get_orders', auth, async (req, res) => {
         console.log(orders.length);
         console.log(orders)
         res.status(200).json({
+            length:orders.length,
             status: 200,
             message: "Orders fetched successfully",
             data: orders

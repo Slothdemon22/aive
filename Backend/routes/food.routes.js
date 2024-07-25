@@ -10,11 +10,11 @@ const router = express.Router();
 
 router.post('/insertfood', adminAuth, upload.single('foodImage'), async (req, res) => {
     console.log(req.file);
+    if (!req.file) return res.status(400).json("No file uploaded");
+    if (req.file.size > 1000000) return res.status(400).json("File size too large");
+    if(!req.body.foodName || !req.body.foodPrice || !req.body.foodDescription) return res.status(400).json("Please fill all the required fields");
     cloudinary.uploader.upload(req.file.path, async (error, result) => {
-        if (error) {
-            console.error(error);
-            return res.status(500).send(error);
-        }
+        
         // console.log(result.url);
         const food = await new Food({
             foodImage: result.url,
