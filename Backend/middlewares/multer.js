@@ -10,6 +10,7 @@ const storage = multer.diskStorage({
     }
 });
 
+// Create Multer middleware
 const upload = multer({ storage });
 
 export default upload;
