@@ -29,4 +29,7 @@ connectDB();
 app.use('/api/v1/users', userRoutes);
 app.use('/api/v1/orders', orderRoutes);
 app.use('/api/v1/food', foodRoutes);
+app.get('/', (req, res) => {
+    res.send("Hello World");
+})
 app.listen(process.env.PORT||3000, () => console.log("Server is running on port 3000"))
