@@ -3,14 +3,14 @@ import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-function Orders() {
+function Orders({url}) {
     axios.defaults.withCredentials = true;
     const [orders, setOrders] = useState([]);
     const [updatingStatus, setUpdatingStatus] = useState(null);
 
     const delOrder = async (id) => {
         try {
-            const res = await axios.post(`http://localhost:3000/api/v1/orders/remove_order`, { id }, { withCredentials: true });
+            const res = await axios.post(`${url}/api/v1/orders/remove_order`, { id }, { withCredentials: true });
             toast.success("Order deleted successfully!");
             fetchOrders();
         } catch (error) {
@@ -21,7 +21,7 @@ function Orders() {
 
     const fetchOrders = async () => {
         try {
-            const res = await axios.get("http://localhost:3000/api/v1/orders/get_orders", { withCredentials: true });
+            const res = await axios.get(`${url}/api/v1/orders/get_orders`, { withCredentials: true });
             console.log(res.data);
             if (res.data && res.data.data) {
                 setOrders(res.data.data); // Set orders to res.data.data
@@ -36,7 +36,7 @@ function Orders() {
     const handleStatusChange = async (orderId, newStatus) => {
         setUpdatingStatus(orderId);
         try {
-            await axios.post(`http://localhost:3000/api/v1/orders/update_status/`, { id: orderId, status: newStatus }, { withCredentials: true });
+            await axios.post(`${url}/api/v1/orders/update_status`, { id: orderId, status: newStatus }, { withCredentials: true });
             toast.success("Order status updated successfully!");
             fetchOrders(); // Refresh orders list
         } catch (error) {

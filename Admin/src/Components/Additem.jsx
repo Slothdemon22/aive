@@ -3,7 +3,7 @@ import axios from 'axios';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-function Additem() {
+function Additem({url}) {
     axios.defaults.withCredentials = true;
     const [foodData, setFoodData] = useState({
         name: '',
@@ -30,7 +30,7 @@ function Additem() {
         formData.append('foodImage', foodData.foodimage);
 
         try {
-            const response = await axios.post('http://localhost:3000/api/v1/food/insertfood', formData, {
+            const response = await axios.post(`${url}/api/v1/food/insertfood`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },

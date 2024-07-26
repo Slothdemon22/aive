@@ -3,12 +3,12 @@ import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-function FoodItems() {
+function FoodItems({url}) {
     const [foodItems, setFoodItems] = useState([]);
 
     const handleDelete = async (id) => {
         try {
-            const res = await axios.post(`http://localhost:3000/api/v1/food/remove_food`, { id }, { withCredentials: true });
+            const res = await axios.post(`${url}/api/v1/food/remove_food`, { id }, { withCredentials: true });
             toast.success("Food item deleted successfully!");
             fetchFoodItems(); // Refresh the list of food items
         } catch (error) {
@@ -19,7 +19,7 @@ function FoodItems() {
 
     const fetchFoodItems = async () => {
         try {
-            const res = await axios.get("http://localhost:3000/api/v1/food/getfood", { withCredentials: true });
+            const res = await axios.get(`${url}/api/v1/food/getfood`, { withCredentials: true });
             console.log(res.data);
             if (res.data && res.data.data) {
                 setFoodItems(res.data.data); // Set food items to res.data.data
