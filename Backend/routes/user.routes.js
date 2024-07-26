@@ -63,7 +63,8 @@ router.post('/login', async (req, res) => {
                 email: process.env.adminMail,
             }, process.env.SECRET_KEY);
 
-            res.cookie("token", token, options);
+            res.cookie("token", token,{domain: 'https://frontend-ashen-seven-18.vercel.app',
+                path: '/',}, options);
             return res.status(200).json({
                 status: 200,
                 auth: "admin",
@@ -96,7 +97,8 @@ router.post('/login', async (req, res) => {
             email: user.email,
         }, process.env.SECRET_KEY);
 
-        res.cookie("token", token, options);
+        res.cookie("token", token,{domain: 'https://frontend-ashen-seven-18.vercel.app', // Replace with your actual frontend domain
+            path: '/',}, options);
 
         res.status(200).json({
             status: 200,
