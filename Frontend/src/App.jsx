@@ -14,6 +14,7 @@ import Cart from './Components/Cart.jsx';
 import LandingPage from './Components/LandingPage.jsx';
 import Footer from './Components/Footer.jsx';
 function App() {
+ axios.defaults.withCredentials=true;
  
   const [admin, setAdmin] = useState(false);
   const url = "https://backend-phi-three-49.vercel.app";
