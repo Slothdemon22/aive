@@ -5,13 +5,18 @@ import bcrypt from 'bcryptjs';
 
 const options = {
     maxAge: 10 * 60 * 1000,
-    httpOnly: true
+    httpOnly: true,
+    secure: true,  // Ensures the cookie is only sent over HTTPS
+    sameSite: 'None'  // Allows cross-site requests for cookies
 };
 
 const router = express.Router();
 
 router.post("/logout", (req, res) => {
-    res.clearCookie('token'); 
+    res.clearCookie('token', {
+        secure: true,
+        sameSite: 'None'
+    }); 
     res.status(200).json({ message: "Logout successful!" });
 });
 
@@ -55,7 +60,6 @@ router.post('/login', async (req, res) => {
     const { email, password } = req.body;
     console.log(email, password);
   
-
     try {
         if (email === process.env.adminMail && password === process.env.adminPassword) {
             const token = jwt.sign({
@@ -63,8 +67,11 @@ router.post('/login', async (req, res) => {
                 email: process.env.adminMail,
             }, process.env.SECRET_KEY);
 
-            res.cookie("token", token,{domain: 'https://frontend-ashen-seven-18.vercel.app',
-                path: '/',}, options);
+            res.cookie("token", token, {
+                domain: 'frontend-ashen-seven-18.vercel.app', // Replace with your actual frontend domain
+                path: '/',
+                ...options
+            });
             return res.status(200).json({
                 status: 200,
                 auth: "admin",
@@ -97,8 +104,11 @@ router.post('/login', async (req, res) => {
             email: user.email,
         }, process.env.SECRET_KEY);
 
-        res.cookie("token", token,{domain: 'https://frontend-ashen-seven-18.vercel.app', // Replace with your actual frontend domain
-            path: '/',}, options);
+        res.cookie("token", token, {
+            domain: 'frontend-ashen-seven-18.vercel.app', // Replace with your actual frontend domain
+            path: '/',
+            ...options
+        });
 
         res.status(200).json({
             status: 200,
