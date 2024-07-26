@@ -19,7 +19,7 @@ app.use(cookieParser());
 app.use(express.json())
 
 app.use(cors({
-    origin: ["https://frontend-ashen-seven-18.vercel.app"], // Allow all origins
+    origin: ["https://frontend-ashen-seven-18.vercel.app","https://admin-panel-gilt-two.vercel.app"], // Allow all origins
     methods: ["POST", "GET", "PUT", "DELETE", "OPTIONS"], // Allow these methods
     credentials: true // Allow credentials (cookies, etc.)
 }));
