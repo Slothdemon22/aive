@@ -3,6 +3,7 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 
 function Register({url}) {
+    axios.defaults.withCredentials=true;
     const [formData, setFormData] = useState({
         username: '',
         email: '',
