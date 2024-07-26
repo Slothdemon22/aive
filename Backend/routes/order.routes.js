@@ -8,7 +8,7 @@ import authAdmin from '../middlewares/authAdmin.js';
 
 const router = express.Router();
 
-router.post('/place_order', async (req, res) => {
+router.post('/place_order',auth, async (req, res) => {
     try {
         const { productId, quantity } = req.body;
         
@@ -68,7 +68,7 @@ router.post('/place_order', async (req, res) => {
     }
 });
 
-router.post("/remove_order",async (req, res) => {
+router.post("/remove_order",adminAuth,async (req, res) => {
     try {
         const { id } = req.body;
         const order = await Order.findById(id);
@@ -93,7 +93,7 @@ router.post("/remove_order",async (req, res) => {
     }    
 });
 
-router.get('/get_orders', async (req, res) => {
+router.get('/get_orders', auth,async (req, res) => {
     try {
         const orders = await Order.find({}).populate('foodItem').populate('placedBy');
         res.status(200).json({
@@ -112,7 +112,7 @@ router.get('/get_orders', async (req, res) => {
     }
 });
 
-router.get('/cart',  async (req, res) => {
+router.get('/cart', auth, async (req, res) => {
     try {
         const Cart = await Order.find({ placedBy: req.user }).populate('foodItem');
         res.status(200).json({
@@ -130,7 +130,7 @@ router.get('/cart',  async (req, res) => {
     }
 });
 
-router.post("/update_status", async (req, res) => {
+router.post("/update_status", auth,async (req, res) => {
     const { id, status } = req.body;
 
     try {
