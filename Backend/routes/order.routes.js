@@ -68,7 +68,7 @@ router.post('/place_order', async (req, res) => {
     }
 });
 
-router.post("/remove_order", authAdmin, async (req, res) => {
+router.post("/remove_order",async (req, res) => {
     try {
         const { id } = req.body;
         const order = await Order.findById(id);
