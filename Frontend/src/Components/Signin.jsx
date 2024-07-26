@@ -12,6 +12,7 @@ function Signin({ url,setAdmin ,popup, setPopup }) {
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
+    axios.defaults.withCredentials=true;
     e.preventDefault();
     try {
       const res = await axios.post(`${url}/api/v1/users/login`, {
