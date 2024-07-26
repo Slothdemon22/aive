@@ -3,6 +3,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 
 function Cart({url}) {
+    axios.defaults.withCredentials=true;
     const [cart, setCart] = useState([]);
 
     const fetchCart = async () => {
