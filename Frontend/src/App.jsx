@@ -16,7 +16,7 @@ import Footer from './Components/Footer.jsx';
 function App() {
  
   const [admin, setAdmin] = useState(false);
-  const url = "http://backend-app-sigma.vercel.app";
+  const url = "https://backend-foodapp.vercel.app";
   //const url = encodeURI("http://localhost:3000");
 
   useEffect(() => {
