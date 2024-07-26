@@ -8,7 +8,7 @@ import { Food } from '../models/food.model.js';
 
 const router = express.Router();
 
-router.post('/insertfood', adminAuth, upload.single('foodImage'), async (req, res) => {
+router.post('/insertfood', upload.single('foodImage'), async (req, res) => {
     try {
         if (!req.file) return res.status(400).json("No file uploaded");
         if (req.file.size > 1000000) return res.status(400).json("File size too large");
@@ -37,7 +37,7 @@ router.post('/insertfood', adminAuth, upload.single('foodImage'), async (req, re
         res.status(500).json({ message: 'An error occurred during the upload' });
     }
 });
-router.post("/remove_food",adminAuth, async (req, res) => {
+router.post("/remove_food",async (req, res) => {
     console.log(req.body);
     const { id } = req.body;
     const item = await Food.deleteOne({ _id: id });
