@@ -8,7 +8,7 @@ import authAdmin from '../middlewares/authAdmin.js';
 
 const router = express.Router();
 
-router.post('/place_order', auth, async (req, res) => {
+router.post('/place_order', async (req, res) => {
     try {
         const { productId, quantity } = req.body;
         
@@ -93,7 +93,7 @@ router.post("/remove_order", authAdmin, async (req, res) => {
     }    
 });
 
-router.get('/get_orders', auth, async (req, res) => {
+router.get('/get_orders', async (req, res) => {
     try {
         const orders = await Order.find({}).populate('foodItem').populate('placedBy');
         res.status(200).json({
