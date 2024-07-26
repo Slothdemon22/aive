@@ -112,7 +112,7 @@ router.get('/get_orders', async (req, res) => {
     }
 });
 
-router.get('/cart', auth, async (req, res) => {
+router.get('/cart',  async (req, res) => {
     try {
         const Cart = await Order.find({ placedBy: req.user }).populate('foodItem');
         res.status(200).json({
