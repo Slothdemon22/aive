@@ -11,22 +11,13 @@ const router = express.Router();
 router.post('/place_order', auth, async (req, res) => {
     try {
         const { productId, quantity } = req.body;
-        if (!productId || !quantity) {
-            return res.status(400).json({   
-                status: 400,
-                message: "Please provide all the required fields",
-            });
-        }
+        
+       
 
         // Ensure req.user is a valid ObjectId
-        if (!mongoose.Types.ObjectId.isValid(req.user)) {
-            return res.status(400).json({
-                status: 400,
-                message: "Invalid user ID",
-            });
-        }
-
+    
         // Find the food item
+        console.log("Test user", req.user);
         const item = await Food.findById(productId);
         if (!item) {
             return res.status(404).json({

@@ -2,12 +2,12 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-function Cart() {
+function Cart({url}) {
     const [cart, setCart] = useState([]);
 
     const fetchCart = async () => {
         try {
-            const res = await axios.get("http://backend-app-sigma.vercel.app/api/v1/orders/cart", { withCredentials: true });
+            const res = await axios.get(`${url}/api/v1/orders/cart`, { withCredentials: true });
             setCart(res.data.data);
             toast.success("Cart fetched successfully!");
         } catch (error) {

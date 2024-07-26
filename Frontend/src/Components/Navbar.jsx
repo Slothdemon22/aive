@@ -7,7 +7,7 @@ import axios from "axios";
 import { FaBars, FaHome, FaSignInAlt, FaUserPlus, FaUser, FaShoppingCart, FaChevronDown, FaCommentDots, FaSignOutAlt } from "react-icons/fa";
 import Signin from "./Signin";
 
-function Navbar({ setAdmin,admin }) {
+function Navbar({ url,setAdmin,admin }) {
   const [mode, setMode] = useState(false);
   const [popup, setPopup] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -57,7 +57,7 @@ function Navbar({ setAdmin,admin }) {
     setPopup(false);
   };
   const handleAdminClick = () => {
-    window.open('http://backend-app-sigma.vercel.app/fooditems', '_blank');
+    window.open(`http://localhost:5174/fooditems`, '_blank');
     handleLinkClick();
   };
 
@@ -192,7 +192,7 @@ function Navbar({ setAdmin,admin }) {
         </button>
       </div>
 
-      {popup && <Signin setAdmin={setAdmin} popup={popup} setPopup={setPopup}/>}
+      {popup && <Signin setAdmin={setAdmin}  url={url} popup={popup} setPopup={setPopup}/>}
     </>
   );
 }

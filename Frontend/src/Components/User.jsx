@@ -3,13 +3,14 @@ import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-function User() {
+function User({url}) {
     const [foodItems, setFoodItems] = useState([]);
     const [quantities, setQuantities] = useState({});
 
     const fetchFoodItems = async () => {
         try {
-            const res = await axios.get("http://backend-app-sigma.vercel.app/api/v1/food/getfood", { withCredentials: true });
+            const res = await axios.get(`${url}/api/v1/food/getfood`, { withCredentials: true });
+            console.log(res);
             if (res.data && res.data.data) {
                 setFoodItems(res.data.data);
                 toast.success("Food items fetched successfully!");
@@ -26,7 +27,8 @@ function User() {
 
     const handleOrder = async (itemId, quantity) => {
         try {
-            await axios.post("http://backend-app-sigma.vercel.app/api/v1/orders/place_order", {
+            console.log(itemId, quantity);
+            await axios.post(`${url}/api/v1/orders/place_order`, {
                 productId: itemId,
                 quantity: quantity,
             }, { withCredentials: true });

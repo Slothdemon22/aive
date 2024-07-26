@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import { Link } from "react-router-dom";
-function Signin({ setAdmin ,popup, setPopup }) {
+function Signin({ url,setAdmin ,popup, setPopup }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
@@ -14,17 +14,19 @@ function Signin({ setAdmin ,popup, setPopup }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('http://localhost:3000/api/v1/users/login', {
+      const res = await axios.post(`${url}/api/v1/users/login`, {
         email,
         password,
       }, { withCredentials: true });
       if (res.data.auth === "admin") {
         setAdmin(true);
+        setPopup(false);
         localStorage.setItem('auth', res.data.auth);
       }
       else if(res.data.auth === "user")
       {
         setAdmin(false);
+        setPopup(false);
         localStorage.setItem('auth', res.data.auth);
       }
       else {

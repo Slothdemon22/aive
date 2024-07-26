@@ -16,6 +16,8 @@ import Footer from './Components/Footer.jsx';
 function App() {
  
   const [admin, setAdmin] = useState(false);
+  const url = "http://backend-app-sigma.vercel.app";
+  //const url = encodeURI("http://localhost:3000");
 
   useEffect(() => {
     const checkAuthStatus = async () => {
@@ -29,7 +31,7 @@ function App() {
   
       if (email && password && auth) {
         try {
-          const response = await axios.post('http://localhost:3000/api/v1/users/login', {
+          const response = await axios.post(`${url}/api/v1/users/login`, {
             email,
             password
           }, { withCredentials: true });
@@ -66,17 +68,17 @@ function App() {
   return (
 <>
     <Router>
-      <Navbar admin={admin} setAdmin={setAdmin} />
+      <Navbar admin={admin} url={url} setAdmin={setAdmin} />
       
       <Routes>
         <Route path='/' element={<LandingPage/>} />
-        <Route path='/signin' element={<Signin admin={admin} setAdmin={setAdmin} />} />
+        <Route path='/signin' element={<Signin admin={admin} url={url} setAdmin={setAdmin} />} />
 
         
-        <Route path='/user' element={(auth=="user"||auth=="admin") ? <User /> : <Navigate to='/' />} />
-        <Route path='/cart' element={<Cart />} />
+        <Route path='/user' element={(auth=="user"||auth=="admin") ? <User url={url}/> : <Navigate to='/' />} />
+        <Route path='/cart' element={<Cart url={url} />} />
         
-        <Route path='/register' element={<Register />} />
+        <Route path='/register' element={<Register url={url} />} />
         </Routes>
         
       <ToastContainer />

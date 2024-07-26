@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 
-function Register() {
+function Register({url}) {
     const [formData, setFormData] = useState({
         username: '',
         email: '',
@@ -26,7 +26,7 @@ function Register() {
             return;
         }
         try {
-            const response = await axios.post('http://backend-app-sigma.vercel.app/api/v1/users/register', formData);
+            const response = await axios.post(`${url}/api/v1/users/register`, formData);
             console.log(response.data);
             toast.success(response.data.message);
         } catch (error) {
