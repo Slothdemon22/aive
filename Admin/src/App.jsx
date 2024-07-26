@@ -8,15 +8,16 @@ import FoodItems from "./Components/Fooditems";
 import Footer from "./Components/Footer";
 
 function App() {
+  const url = "https://backend-nine-rose-80.vercel.app";
   return (
     <Router>
       <div className="flex min-h-screen ">
-        <Navbar />
+        <Navbar url={url} />
         <div className="flex-1 flex flex-col items-center justify-center p-4">
           <Routes>
-            <Route path="/additems" element={<Additem />} />
-            <Route path="/fooditems" element={<FoodItems />} />
-            <Route path="/getorders" element={<Orders />} />
+            <Route path="/additems" element={<Additem  url={url} />} />
+            <Route path="/fooditems" element={<FoodItems  url={url} />} />
+            <Route path="/getorders" element={<Orders  url={url} />} />
             {/* Define other routes here */}
           </Routes>
         </div>
