@@ -44,7 +44,7 @@ router.post("/remove_food",adminAuth, async (req, res) => {
     console.log(item);
     res.status(200).json("Food item deleted successfully");
 })
-router.get('/getfood', auth, async (req, res) => {
+router.get('/getfood', async (req, res) => {
     const data = await Food.find({});
     
     res.status(200).json({
