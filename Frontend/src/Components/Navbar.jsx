@@ -8,6 +8,7 @@ import { FaBars, FaHome, FaSignInAlt, FaUserPlus, FaUser, FaShoppingCart, FaChev
 import Signin from "./Signin";
 
 function Navbar({ url,setAdmin,admin }) {
+  axios.defaults.withCredentials=true;
   const [mode, setMode] = useState(false);
   const [popup, setPopup] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
