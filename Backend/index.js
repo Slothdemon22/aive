@@ -18,11 +18,10 @@ const app = express();
 app.use(cookieParser());
 app.use(express.json())
 app.use(cors({
-    origin: ["http://localhost:5173","http://localhost:5174"], // Replace with the exact origin(s) allowed
-    methods: ["POST", "GET", "PUT", "DELETE", "OPTIONS"],
+    origin: ["http://localhost:5173", "http://localhost:5174", "https://deploy-mern-lwhq.vercel.app","https://backend-foodapp.vercel.app"],
+    methods: ["POST", "GET"],
     credentials: true
 }));
-
 
 connectDB();
 app.use('/api/v1/users', userRoutes);
