@@ -8,7 +8,7 @@ import './index.css'
 ReactDOM.createRoot(document.getElementById('root')).render(
   
     <NextUIProvider>
-      axios.defaults.withCredentials=true;
+      axios.defaults.withCredentials=true,
       <App />
     </NextUIProvider>
   
