@@ -8,7 +8,7 @@ import FoodItems from "./Components/Fooditems";
 import Footer from "./Components/Footer";
 
 function App() {
-  const url = "https://backend-nine-rose-80.vercel.app";
+  const url = "https://backend-phi-three-49.vercel.app";
   return (
     <Router>
       <div className="flex min-h-screen ">
