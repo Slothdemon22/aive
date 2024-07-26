@@ -6,7 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 function User({url}) {
     const [foodItems, setFoodItems] = useState([]);
     const [quantities, setQuantities] = useState({});
-
+ axios.defaults.withCredentials=true;
     const fetchFoodItems = async () => {
         try {
             const res = await axios.get(`${url}/api/v1/food/getfood`, { withCredentials: true });
