@@ -57,7 +57,7 @@ function Navbar({ url,setAdmin,admin }) {
     setPopup(false);
   };
   const handleAdminClick = () => {
-    window.open(`http://localhost:5174/fooditems`, '_blank');
+    window.open(`https://admin-tau-silk.vercel.app/fooditems`, '_blank');
     handleLinkClick();
   };
 
