@@ -16,8 +16,8 @@ import Footer from './Components/Footer.jsx';
 function App() {
  
   const [admin, setAdmin] = useState(false);
-  //const url = "https://backend-green-theta.vercel.app";
-  const url = "http://localhost:3000";
+  const url = "https://backend-nine-rose-80.vercel.app";
+  //const url = "http://localhost:3000";
 
   useEffect(() => {
     const checkAuthStatus = async () => {
