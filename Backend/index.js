@@ -1,33 +1,25 @@
-import express from "express"
-import cors from "cors"
-import dotenv from 'dotenv';
-import mongoose from "mongoose";
-import { connectDB } from "./db/databaseConnection.js";
-import userRoutes from "./routes/user.routes.js";
-import orderRoutes from "./routes/order.routes.js"
-import foodRoutes from "./routes/food.routes.js"
-import cookieParser from "cookie-parser";
-
-dotenv.config();
-
-
-
-
+import express from 'express';
+import cors from 'cors';
+import cookieParser from 'cookie-parser';
 
 const app = express();
-app.use(cookieParser());
-app.use(express.json())
+
+// CORS configuration to allow all origins
 app.use(cors({
-    origin: ["http://localhost:5173", "http://localhost:5174", "https://deploy-mern-lwhq.vercel.app","https://backend-foodapp.vercel.app"],
-    methods: ["POST", "GET"],
-    credentials: true
+    origin: '*', // Allow all origins
+    methods: ['POST', 'GET', 'PUT', 'DELETE', 'OPTIONS'], // Allow these methods
+    credentials: true // Allow credentials (cookies, etc.)
 }));
 
-connectDB();
+app.use(cookieParser());
+app.use(express.json());
+
+// Define your routes
 app.use('/api/v1/users', userRoutes);
-app.use('/api/v1/orders', orderRoutes);
 app.use('/api/v1/food', foodRoutes);
-app.get('/', (req, res) => {
-    res.send("Hello World");
-})
-app.listen(process.env.PORT||3000, () => console.log("Server is running on port 3000"))
+app.use('/api/v1/orders', orderRoutes);
+
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+});
