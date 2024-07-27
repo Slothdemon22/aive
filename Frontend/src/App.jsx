@@ -17,7 +17,7 @@ function App() {
  axios.defaults.withCredentials=true;
  
   const [admin, setAdmin] = useState(false);
-  const url = "https://backend-test-final-zeta.vercel.app";
+  const url = "https://backend-test1-kappa.vercel.app";
   //const url = "http://localhost:3000";
 
   useEffect(() => {
